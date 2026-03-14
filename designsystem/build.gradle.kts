@@ -19,6 +19,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":domain"))
             implementation(libs.bundles.compose.multiplatform)
         }
         commonTest.dependencies {
@@ -45,4 +46,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+dependencies {
+    debugImplementation(libs.compose.ui.tooling)
 }
