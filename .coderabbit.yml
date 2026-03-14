@@ -1,0 +1,94 @@
+# CodeRabbit이 사용할 언어 설정
+language: ko-KR
+
+tone_instructions: >
+  문제의 원인과 개선 방법을 명확히 제시하고 교육적 관점에서 리뷰하세요.
+  비난보다는 개선 방향을 제안하며, 가능한 경우 근거와 예시를 함께 제공합니다.
+  특별한 문제가 없다면 칭찬도 적극적으로 남깁니다.
+  Kotlin 및 Compose Multiplatform 관련 코드에는 공식 가이드라인과 best practice를 기준으로 리뷰합니다.
+  [리뷰 스타일]
+  - 왜 문제가 되는지 → 어떻게 개선할 수 있는지 순서로 설명합니다.
+  - 토론이 필요한 부분은 질문형 코멘트로 제안합니다.
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  changed_files_summary: true
+  sequence_diagrams: false
+  assess_linked_issues: true
+  related_issues: false
+  related_prs: false
+  suggested_labels: false
+  auto_apply_labels: false
+  suggested_reviewers: false
+  auto_assign_reviewers: false
+  poem: false
+  abort_on_close: true
+  disable_cache: false
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    base_branches:
+      - main
+      - develop
+    # ✅ CMP 플랫폼별 경로 ignore 추가
+    ignore_title_keywords:
+      - "WIP"
+      - "Draft"
+      - "chore"
+
+  # ✅ CMP 특성상 자동 생성 파일 제외
+  path_filters:
+    - "!**/build/**"
+    - "!**/.gradle/**"
+    - "!**/generated/**"
+    - "!**/*.pb.kt"
+    - "!**/BuildConfig.kt"
+    - "!gradlew"
+    - "!gradlew.bat"
+
+  path_instructions:
+    - path: "composeApp/src/commonMain/**"
+      instructions: >
+        공통 비즈니스 로직입니다. 플랫폼 의존 코드가 포함되지 않도록 주의하고,
+        expect/actual 패턴이 적절히 사용되었는지 확인하세요.
+    - path: "composeApp/src/androidMain/**"
+      instructions: >
+        Android 전용 구현입니다. Android 최신 Compose 가이드라인을 기준으로 리뷰하세요.
+        Context 누수, 생명주기 처리 등을 중점적으로 확인하세요.
+    - path: "composeApp/src/iosMain/**"
+      instructions: >
+        iOS 전용 구현입니다. UIKit 브릿지 코드가 있다면 메모리 관리에 주의하세요.
+        KMP의 Kotlin/Native 제약사항을 고려하여 리뷰하세요.
+    - path: "composeApp/src/desktopMain/**"
+      instructions: >
+        Desktop(JVM) 전용 구현입니다. 윈도우 관리, 리소스 해제를 중점적으로 확인하세요.
+    - path: "**/*ViewModel.kt"
+      instructions: >
+        ViewModel 입니다. StateFlow/SharedFlow 사용이 적절한지,
+        단방향 데이터 흐름(UDF) 패턴을 따르는지 확인하세요.
+    - path: "**/*Repository.kt"
+      instructions: >
+        Repository 레이어입니다. 에러 처리, Result/Flow 래핑,
+        플랫폼 중립적 구현 여부를 확인하세요.
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - README.md
+      - docs/**/*.md
+      - "**/*.md"
+  learnings:
+    scope: local
+  issues:
+    scope: local
+  pull_requests:
+    scope: local
