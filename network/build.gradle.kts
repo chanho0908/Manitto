@@ -33,10 +33,16 @@ kotlin {
 
 android {
     namespace = "com.peto.manitto.network"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk =
+        libs.versions.compileSdk
+            .get()
+            .toInt()
 
     defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
+        minSdk =
+            libs.versions.minSdk
+                .get()
+                .toInt()
     }
 
     compileOptions {
@@ -44,4 +50,3 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
