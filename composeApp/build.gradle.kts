@@ -33,6 +33,9 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.compose.multiplatform)
             implementation(libs.bundles.androidx.lifecycle)
+            implementation(projects.data)
+            implementation(projects.designsystem)
+            implementation(projects.domain)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
