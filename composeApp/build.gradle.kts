@@ -1,17 +1,17 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ktlint)
 }
 
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
@@ -27,18 +27,12 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.compose.uiToolingPreview)
+            implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(libs.compose.runtime)
-            implementation(libs.compose.foundation)
-            implementation(libs.compose.material3)
-            implementation(libs.compose.ui)
-            implementation(libs.compose.components.resources)
-            implementation(libs.compose.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.bundles.compose.multiplatform)
+            implementation(libs.bundles.androidx.lifecycle)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -49,18 +43,18 @@ kotlin {
 android {
     namespace = "com.peto.manitto"
     compileSdk =
-        libs.versions.android.compileSdk
+        libs.versions.compileSdk
             .get()
             .toInt()
 
     defaultConfig {
         applicationId = "com.peto.manitto"
         minSdk =
-            libs.versions.android.minSdk
+            libs.versions.minSdk
                 .get()
                 .toInt()
         targetSdk =
-            libs.versions.android.targetSdk
+            libs.versions.targetSdk
                 .get()
                 .toInt()
         versionCode = 1
@@ -77,25 +71,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    debugImplementation(libs.compose.uiTooling)
-}
-
-ktlint {
-    android.set(true)
-    outputToConsole.set(true)
-    ignoreFailures.set(false)
-    filter {
-        exclude("**/build/**")
-        exclude("**/generated/**")
-    }
-}
-
-tasks.named("check").configure {
-    dependsOn(tasks.named("ktlintCheck"))
+    debugImplementation(libs.compose.ui.tooling)
 }
