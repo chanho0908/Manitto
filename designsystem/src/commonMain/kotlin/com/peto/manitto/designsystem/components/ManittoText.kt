@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import com.peto.manitto.designsystem.extension.toTextStyle
 import com.peto.manitto.designsystem.theme.LocalAppTypography
+import com.peto.manitto.designsystem.theme.ManittoTextStyle
 import com.peto.manitto.designsystem.theme.ManittoTheme
-import com.peto.manitto.domain.model.enums.ManittoTextStyle
 
 @Composable
 fun ManittoText(

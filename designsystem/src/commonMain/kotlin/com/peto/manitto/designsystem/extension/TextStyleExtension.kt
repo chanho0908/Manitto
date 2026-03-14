@@ -2,7 +2,6 @@ package com.peto.manitto.designsystem.extension
 
 import androidx.compose.ui.text.TextStyle
 import com.peto.manitto.designsystem.theme.AppTypography
-import com.peto.manitto.domain.model.enums.ManittoTextStyle
 
 fun ManittoTextStyle.toTextStyle(typo: AppTypography): TextStyle =
     when (this) {

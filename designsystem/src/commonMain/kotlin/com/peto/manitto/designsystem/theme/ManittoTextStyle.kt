@@ -1,4 +1,4 @@
-package com.peto.manitto.domain.model.enums
+package com.peto.manitto.designsystem.theme
 
 enum class ManittoTextStyle {
     J1,
