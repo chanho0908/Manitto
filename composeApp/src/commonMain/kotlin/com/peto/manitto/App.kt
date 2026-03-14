@@ -18,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.peto.manitto.designsystem.theme.ManittoTheme
 import manitto.composeapp.generated.resources.Res
 import manitto.composeapp.generated.resources.compose_multiplatform
 import org.jetbrains.compose.resources.painterResource
@@ -26,7 +25,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 @Preview
 fun App() {
-    ManittoTheme {
+    MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
             modifier =
